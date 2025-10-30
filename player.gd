@@ -31,12 +31,14 @@ func set_hunter_state(hunter_state: bool) -> void:
 func take_damage(amount: float) -> void:
 	current_hp -= amount
 	current_hp = clamp(current_hp, 0.0, max_hp)
+	print("hp: ", current_hp)
 	# TODO: update HP UI
 	if current_hp <= 0.0:
 		emit_signal("died", name)
 
 func gain_xp(amount: int) -> void:
 	xp += amount
+	take_damage(amount * (-1))
 	# optional level-up logic
 
 func _on_hit_area_body_entered(body: Node) -> void:
