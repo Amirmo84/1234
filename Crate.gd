@@ -10,7 +10,7 @@ enum CrateType {
 @export var crate_type: CrateType = CrateType.XP
 @export var damage_amount: float = 15.0
 @export var xp_amount: int = 10
-@export var respawn_time: float = 12.0
+@export var respawn_time: float = 5.0
 @export var active_on_start: bool = true
 
 # optional reference to GameManager (set in editor or at runtime)
@@ -81,7 +81,7 @@ func _randomize_position() -> void:
 		var x = rng.randf_range(-5.0, 5.0)
 		var z = rng.randf_range(-5.0, 5.0)
 		global_transform = Transform3D(global_transform.basis, Vector3(x, 0.0, z))
-		print("Randomizing position to:", x, z)
+		print("Randomizing position to: ", x, z, crate_type)
 
 func is_swap() -> bool:
 	return crate_type == CrateType.SWAP

@@ -1,7 +1,7 @@
 # Player.gd
 extends CharacterBody3D
 
-@export var max_hp: float = 100.0
+@export var max_hp: float = 10000.0
 @export var collision_attack_damage: float = 20.0
 @export var xp: int = 0
 @export var is_computer: bool = false   # if true, drive by AI (we'll implement simple AI later)
