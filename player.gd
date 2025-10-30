@@ -33,7 +33,11 @@ func take_damage(amount: float) -> void:
 	current_hp = clamp(current_hp, 0.0, max_hp)
 	# TODO: update HP UI
 	if int(current_hp) % 10 == 0:
-		print("PLayer current HP : " ,int (current_hp))
+		if (not is_computer) :
+			print("Player current HP : " ,int (current_hp))
+		else :
+			print("Enemy current HP : " ,int (current_hp))
+
 	
 	if current_hp <= 0.0:
 		emit_signal("died", name)

@@ -786,7 +786,6 @@ script = ExtResource("5_6cpg0")
 [node name="StormZone" type="Area3D" parent="GameManager"]
 visible = false
 script = ExtResource("6_a6vh8")
-initial_radius = 1000000.0
 damage_increase_rate = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/StormZone"]

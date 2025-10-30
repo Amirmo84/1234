@@ -4,3 +4,4 @@ res://playerAI.gd
 res://Crate.gd
 res://GameManager.gd
 res://StormZone.gd
+res://Player.gd
