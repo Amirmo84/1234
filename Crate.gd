@@ -16,6 +16,8 @@ enum CrateType {
 # optional reference to GameManager (set in editor or at runtime)
 @export var game_manager: Node
 
+@onready var mesh: MeshInstance3D = $MeshInstance3D
+
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _active: bool = true
 
@@ -25,7 +27,25 @@ func _ready() -> void:
 	monitoring = _active
 	visible = _active
 	connect("body_entered", Callable(self, "_on_body_entered"))
+	_set_crate_color()   # <-- Apply color when crate spawns
 
+func _set_crate_color() -> void:
+	var mat := StandardMaterial3D.new()
+
+	match crate_type:
+		CrateType.DAMAGE:
+			mat.albedo_color = Color(1, 0.2, 0.2)  # red
+		CrateType.XP:
+			mat.albedo_color = Color(0.2, 1, 0.2)  # green
+		CrateType.SWAP:
+			mat.albedo_color = Color(0.2, 0.4, 1)  # blue
+
+	# Optional: slight glow so crates look cooler
+	mat.emission_enabled = true
+	mat.emission = mat.albedo_color * 0.6
+
+	mesh.set_surface_override_material(0, mat)
+	
 func activate_as_type() -> void:
 	_active = true
 	visible = true
@@ -72,7 +92,6 @@ func _on_body_entered(body: Node) -> void:
 	var t = respawn_time
 	if game_manager and game_manager.has_variable("crate_respawn_time"):
 		t = game_manager.crate_respawn_time
-	print("time: ", t)
 	_defer_respawn(t)
 
 func _randomize_position() -> void:
