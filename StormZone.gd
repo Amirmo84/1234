@@ -22,28 +22,43 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not active:
 		return
+
 	elapsed_time += delta
+
+	# Shrink over time
 	if shrink_duration > 0.0:
 		var t = clamp(elapsed_time / shrink_duration, 0.0, 1.0)
 		current_radius = lerp(initial_radius, min_radius, t)
 	else:
 		current_radius = max(min_radius, current_radius - (delta * 0.1))
+
 	_update_collision_radius()
 	_update_visual_scale()
+
+	# Increase damage as time passes
 	var damage_now = base_damage_per_second * (1.0 + elapsed_time * damage_increase_rate)
-	# apply damage to overlapping bodies
-	for body in get_overlapping_bodies():
-		if body and body.has_method("take_damage"):
-			body.take_damage(damage_now * delta)
+
+	# Center position of the storm
+	var storm_center = global_position
+
+	# Damage all players *outside* the storm radius
+	for player in get_tree().get_nodes_in_group("Player"):
+		if not player or not player.has_method("take_damage"):
+			continue
+
+		var distance = player.global_position.distance_to(storm_center)
+
+		# Damage if outside current storm radius
+		if distance > current_radius:
+			player.take_damage(damage_now * delta)
 
 func _update_collision_radius() -> void:
 	if not (collision_shape and collision_shape.shape):
 		return
 	var s = collision_shape.shape
-	# Support SphereShape3D and CylinderShape3D
 	if s is SphereShape3D:
 		s.radius = current_radius
-		collision_shape.shape = s # ensure resource updated
+		collision_shape.shape = s
 	elif s is CylinderShape3D:
 		s.radius = current_radius
 		collision_shape.shape = s
@@ -51,5 +66,5 @@ func _update_collision_radius() -> void:
 func _update_visual_scale() -> void:
 	if not visual:
 		return
-	# assume visual is a plane-based mesh sized 1 unit; scale X and Z by radius
+	# assume visual mesh is 1x1 unit; scale it in X/Z to match radius
 	visual.scale = Vector3(current_radius, 1.0, current_radius)

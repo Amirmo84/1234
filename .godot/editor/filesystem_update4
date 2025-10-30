@@ -1,5 +1,2 @@
 res://split_screen.tscn
-res://Crate.gd
-res://GameManager.gd
-res://player.gd
-res://kirestan.tscn
+res://StormZone.gd

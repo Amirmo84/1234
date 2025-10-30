@@ -214,7 +214,6 @@ script = ExtResource("5_6cpg0")
 visible = false
 script = ExtResource("6_a6vh8")
 initial_radius = 50.0
-active = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/StormZone"]
 transform = Transform3D(1.0089036, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
