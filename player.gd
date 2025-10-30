@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 
 var current_hp: float
-signal died
+signal died(player_name)
 
 # optional GameManager reference
 var game_manager: Node = null
@@ -33,7 +33,7 @@ func take_damage(amount: float) -> void:
 	current_hp = clamp(current_hp, 0.0, max_hp)
 	# TODO: update HP UI
 	if current_hp <= 0.0:
-		emit_signal("died")
+		emit_signal("died", name)
 
 func gain_xp(amount: int) -> void:
 	xp += amount

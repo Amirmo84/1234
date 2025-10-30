@@ -53,10 +53,10 @@ func _swap_hunter() -> void:
 	if player2 and player2.has_method("set_hunter_state"):
 		player2.set_hunter_state(hunter == player2)
 
-func _on_player_died() -> void:
-	print("GameManager: A player died. Pausing.")
+func _on_player_died(player_name: String) -> void:
+	print("GameManager: " + player_name + " died.")
 	get_tree().paused = true
-	# TODO: show end screen or emit signal
+
 
 # Return current hunter node
 func get_hunter() -> Node:

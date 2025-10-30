@@ -208,6 +208,7 @@ albedo_color = Color(0.791675, 0.946163, 0.317723, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkrvw"]
 transparency = 1
+albedo_color = Color(0.3086788, 0.46178758, 1, 1)
 
 [node name="World3D" type="Node3D"]
 
@@ -285,7 +286,6 @@ current = true
 [node name="Player1" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 script = ExtResource("5")
-max_hp = 100000.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Player1"]
 mesh = SubResource("2")
@@ -780,18 +780,15 @@ mesh = SubResource("11")
 script = ExtResource("5_6cpg0")
 
 [node name="StormZone" type="Area3D" parent="GameManager"]
-visible = false
 script = ExtResource("6_a6vh8")
-initial_radius = 1000000.0
+initial_radius = 50.0
 damage_increase_rate = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/StormZone"]
 transform = Transform3D(1.0089036, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-visible = false
 shape = SubResource("CylinderShape3D_8y8ki")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/StormZone"]
-visible = false
 mesh = SubResource("CylinderMesh_vavsa")
 surface_material_override/0 = SubResource("StandardMaterial3D_mkrvw")
 
