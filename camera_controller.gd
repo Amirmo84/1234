@@ -107,3 +107,11 @@ func _compute_position_difference_in_world():
 
 func _compute_horizontal_length(vec):
 	return Vector2(vec.x, vec.z).length()
+
+
+func _on_crate_area_entered(area: Area3D) -> void:
+	pass # Replace with function body.
+
+
+func _on_storm_zone_area_entered(area: Area3D) -> void:
+	pass # Replace with function body.

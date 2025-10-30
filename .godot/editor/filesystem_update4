@@ -1,5 +1,6 @@
 res://split_screen.tscn
-res://Crate.gd
-res://GameManager.gd
-res://player.gd
 res://StormZone.gd
+res://Crate.gd
+res://player.gd
+res://GameManager.gd
+res://camera_controller.gd

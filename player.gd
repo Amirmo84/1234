@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var collision_attack_damage: float = 20.0
 @export var xp: int = 0
 @export var is_computer: bool = false   # if true, drive by AI (we'll implement simple AI later)
+@export var move_speed: float = 5.0
+
 
 var current_hp: float
 signal died
@@ -50,3 +52,22 @@ func on_direct_collision_with(other: Node) -> void:
 	if is_hunter and other and other.is_in_group("Player") and other != self:
 		if other.has_method("take_damage"):
 			other.take_damage(collision_attack_damage)
+
+func _physics_process(delta: float) -> void:
+	var input_dir = Vector3.ZERO
+
+	# WASD movement
+	if Input.is_action_pressed("move_forward"):
+		input_dir.z -= 1
+	if Input.is_action_pressed("move_backward"):
+		input_dir.z += 1
+	if Input.is_action_pressed("move_left"):
+		input_dir.x -= 1
+	if Input.is_action_pressed("move_right"):
+		input_dir.x += 1
+
+	input_dir = input_dir.normalized()
+	velocity.x = input_dir.x * move_speed
+	velocity.z = input_dir.z * move_speed
+
+	move_and_slide()
