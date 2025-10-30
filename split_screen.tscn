@@ -285,9 +285,6 @@ current = true
 [node name="Player1" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 script = ExtResource("5")
-max_hp = null
-collision_attack_damage = null
-xp = null
 
 [node name="Mesh" type="MeshInstance3D" parent="Player1"]
 mesh = SubResource("2")
@@ -307,9 +304,6 @@ light_color = Color(1, 0, 0, 1)
 [node name="Player2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.184, 0.875, 3.019)
 script = ExtResource("5")
-max_hp = null
-collision_attack_damage = null
-xp = null
 
 [node name="Mesh" type="MeshInstance3D" parent="Player2"]
 mesh = SubResource("2")
@@ -789,12 +783,6 @@ crate_spawn_chance = null
 
 [node name="StormZone" type="Area3D" parent="GameManager"]
 script = ExtResource("6_a6vh8")
-initial_radius = null
-min_radius = null
-shrink_duration = null
-base_damage_per_second = null
-damage_increase_rate = null
-active = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/StormZone"]
 transform = Transform3D(1.0089036, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
