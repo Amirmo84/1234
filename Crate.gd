@@ -78,9 +78,10 @@ func _randomize_position() -> void:
 	if game_manager and game_manager.has_method("random_position_in_arena"):
 		global_transform = Transform3D(global_transform.basis, game_manager.random_position_in_arena())
 	else:
-		var x = rng.randf_range(-10.0, 10.0)
-		var z = rng.randf_range(-10.0, 10.0)
+		var x = rng.randf_range(-5.0, 5.0)
+		var z = rng.randf_range(-5.0, 5.0)
 		global_transform = Transform3D(global_transform.basis, Vector3(x, 0.0, z))
+		print("Randomizing position to:", x, z)
 
 func is_swap() -> bool:
 	return crate_type == CrateType.SWAP
