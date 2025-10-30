@@ -239,5 +239,31 @@ mesh = SubResource("BoxMesh_6cpg0")
 transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
 shape = SubResource("BoxShape3D_a6vh8")
 
+[node name="crate2" type="Area3D" parent="Crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+script = ExtResource("7_c7r5a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate2"]
+transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
+mesh = SubResource("BoxMesh_6cpg0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate2"]
+transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
+shape = SubResource("BoxShape3D_a6vh8")
+
+[node name="crate3" type="Area3D" parent="Crates"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+script = ExtResource("7_c7r5a")
+crate_type = 2
+respawn_time = 15.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate3"]
+transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
+mesh = SubResource("BoxMesh_6cpg0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate3"]
+transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
+shape = SubResource("BoxShape3D_a6vh8")
+
 [connection signal="area_entered" from="GameManager/StormZone" to="Cameras" method="_on_storm_zone_area_entered"]
 [connection signal="area_entered" from="Crates/crate" to="Cameras" method="_on_crate_area_entered"]

@@ -72,6 +72,7 @@ func _on_body_entered(body: Node) -> void:
 	var t = respawn_time
 	if game_manager and game_manager.has_variable("crate_respawn_time"):
 		t = game_manager.crate_respawn_time
+	print("time: ", t)
 	_defer_respawn(t)
 
 func _randomize_position() -> void:
@@ -81,7 +82,7 @@ func _randomize_position() -> void:
 		var x = rng.randf_range(-5.0, 5.0)
 		var z = rng.randf_range(-5.0, 5.0)
 		global_transform = Transform3D(global_transform.basis, Vector3(x, 0.0, z))
-		print("Randomizing position to: ", x, z, crate_type)
+		print("type: ", crate_type)
 
 func is_swap() -> bool:
 	return crate_type == CrateType.SWAP
