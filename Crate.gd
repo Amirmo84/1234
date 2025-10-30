@@ -38,13 +38,13 @@ func deactivate_temporarily(time_sec: float) -> void:
 	_defer_respawn(time_sec)
 
 func _defer_respawn(time_sec: float) -> void:
-	# using await timer
-	Task.spawn(self, "_respawn_after", time_sec)
-
-# helper as async function via Task.spawn: implementation below
-func _respawn_after(time_sec: float) -> void:
-	# Wait for time_sec seconds then respawn
+	# Wait asynchronously for time_sec seconds, then respawn
 	await get_tree().create_timer(time_sec).timeout
+	_respawn_after()
+
+
+func _respawn_after() -> void:
+	# Actually respawn the crate
 	_randomize_position()
 	_active = true
 	visible = true
@@ -76,11 +76,11 @@ func _on_body_entered(body: Node) -> void:
 
 func _randomize_position() -> void:
 	if game_manager and game_manager.has_method("random_position_in_arena"):
-		global_transform = Transform(global_transform.basis, game_manager.random_position_in_arena())
+		global_transform = Transform3D(global_transform.basis, game_manager.random_position_in_arena())
 	else:
 		var x = rng.randf_range(-10.0, 10.0)
 		var z = rng.randf_range(-10.0, 10.0)
-		global_transform = Transform(global_transform.basis, Vector3(x, 0.0, z))
+		global_transform = Transform3D(global_transform.basis, Vector3(x, 0.0, z))
 
 func is_swap() -> bool:
 	return crate_type == CrateType.SWAP

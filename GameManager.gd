@@ -92,7 +92,7 @@ func distribute_crates() -> void:
 			if rng.randf() < bias and player2:
 				prefer_node = player2
 			var pos = random_position_in_arena(prefer_node, bias)
-			crate.global_transform = Transform(crate.global_transform.basis, pos)
+			crate.global_transform = Transform3D(crate.global_transform.basis, pos)
 			crate.activate_as_type()
 		else:
 			crate.deactivate_temporarily(crate_respawn_time)
