@@ -54,20 +54,21 @@ func on_direct_collision_with(other: Node) -> void:
 			other.take_damage(collision_attack_damage)
 
 func _physics_process(delta: float) -> void:
-	var input_dir = Vector3.ZERO
-
+	if not is_computer:
+		var input_dir = Vector3.ZERO
+	
 	# WASD movement
-	if Input.is_action_pressed("move_forward"):
-		input_dir.z -= 1
-	if Input.is_action_pressed("move_backward"):
-		input_dir.z += 1
-	if Input.is_action_pressed("move_left"):
-		input_dir.x -= 1
-	if Input.is_action_pressed("move_right"):
-		input_dir.x += 1
+		if Input.is_action_pressed("move_forward"):
+			input_dir.z -= 1
+		if Input.is_action_pressed("move_backward"):
+			input_dir.z += 1
+		if Input.is_action_pressed("move_left"):
+			input_dir.x -= 1
+		if Input.is_action_pressed("move_right"):
+			input_dir.x += 1
 
-	input_dir = input_dir.normalized()
-	velocity.x = input_dir.x * move_speed
-	velocity.z = input_dir.z * move_speed
+		input_dir = input_dir.normalized()
+		velocity.x = input_dir.x * move_speed
+		velocity.z = input_dir.z * move_speed
 
-	move_and_slide()
+		move_and_slide()
