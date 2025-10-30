@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var collision_attack_damage: float = 20.0
 @export var xp: int = 0
 @export var is_computer: bool = false   # if true, drive by AI (we'll implement simple AI later)
-@export var move_speed: float = 5.0
+@export var move_speed: float = 10.0
 
 
 var current_hp: float
@@ -32,6 +32,9 @@ func take_damage(amount: float) -> void:
 	current_hp -= amount
 	current_hp = clamp(current_hp, 0.0, max_hp)
 	# TODO: update HP UI
+	if int(current_hp) % 10 == 0:
+		print("PLayer current HP : " ,int (current_hp))
+	
 	if current_hp <= 0.0:
 		emit_signal("died", name)
 
@@ -59,13 +62,13 @@ func _physics_process(delta: float) -> void:
 	
 	# WASD movement
 		if Input.is_action_pressed("move_forward"):
-			input_dir.z -= 1
+			input_dir.z -= move_speed
 		if Input.is_action_pressed("move_backward"):
-			input_dir.z += 1
+			input_dir.z += move_speed
 		if Input.is_action_pressed("move_left"):
-			input_dir.x -= 1
+			input_dir.x -= move_speed
 		if Input.is_action_pressed("move_right"):
-			input_dir.x += 1
+			input_dir.x += move_speed
 
 		input_dir = input_dir.normalized()
 		velocity.x = input_dir.x * move_speed

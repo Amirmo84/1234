@@ -1,7 +1,7 @@
 # StormZone.gd
 extends Area3D
 
-@export var initial_radius: float = 18.0
+@export var initial_radius: float = 10.0
 @export var min_radius: float = 2.0
 @export var shrink_duration: float = 60.0       # seconds to shrink from initial to min
 @export var base_damage_per_second: float = 4.0
@@ -35,6 +35,15 @@ func _process(delta: float) -> void:
 	for body in get_overlapping_bodies():
 		if body and body.has_method("take_damage"):
 			body.take_damage(damage_now * delta)
+			
+#var inside_bodies = get_overlapping_bodies()
+#var all_players = get_tree().get_nodes_in_group("Player")
+
+
+	#for body in all_players:
+		#if body and body.has_method("take_damage") and not inside_bodies.has(body):
+			#body.take_damage(damage_now * delta)
+
 
 func _update_collision_radius() -> void:
 	if not (collision_shape and collision_shape.shape):

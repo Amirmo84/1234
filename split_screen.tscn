@@ -1,10 +1,11 @@
-[gd_scene load_steps=71 format=3 uid="uid://dksa68cph6y4b"]
+[gd_scene load_steps=70 format=3 uid="uid://dksa68cph6y4b"]
 
 [ext_resource type="Script" uid="uid://crthia45btsg0" path="res://camera_controller.gd" id="2"]
 [ext_resource type="Shader" uid="uid://d0lvsuslyb3of" path="res://split_screen.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://brwp8bimc75uu" path="res://icon.webp" id="4"]
 [ext_resource type="Script" uid="uid://b3w42xxb434i3" path="res://player.gd" id="5"]
 [ext_resource type="Script" uid="uid://dyevnyllyk6lr" path="res://GameManager.gd" id="5_6cpg0"]
+[ext_resource type="Script" uid="uid://bdjwgq1pyj5aa" path="res://playerAI.gd" id="5_a6vh8"]
 [ext_resource type="Script" uid="uid://b03wlsd42nbhw" path="res://StormZone.gd" id="6_a6vh8"]
 [ext_resource type="Script" uid="uid://keqnesh70e07" path="res://Crate.gd" id="7_c7r5a"]
 
@@ -204,15 +205,14 @@ albedo_color = Color(0.791675, 0.946163, 0.317723, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8y8ki"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_vavsa"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_a6vh8"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkrvw"]
 transparency = 1
-albedo_color = Color(0.3086788, 0.46178758, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_6cpg0"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_a6vh8"]
+albedo_color = Color(1, 0.18431373, 1, 1)
 
 [node name="World3D" type="Node3D"]
 
@@ -290,7 +290,7 @@ current = true
 [node name="Player1" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 script = ExtResource("5")
-max_hp = 10000.0
+max_hp = 100000.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Player1"]
 mesh = SubResource("2")
@@ -309,9 +309,8 @@ light_color = Color(1, 0, 0, 1)
 
 [node name="Player2" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.184, 0.875, 3.019)
-script = ExtResource("5")
-max_hp = 10000.0
-is_computer = true
+script = ExtResource("5_a6vh8")
+max_hp = 100000.0
 
 [node name="Mesh" type="MeshInstance3D" parent="Player2"]
 mesh = SubResource("2")
@@ -340,7 +339,6 @@ transform = Transform3D(200, 0, 0, 0, 1, 0, 0, 0, 200, 0, -1, 0)
 shape = SubResource("8")
 
 [node name="Walls" type="Node3D" parent="."]
-visible = false
 
 [node name="Group1" type="Node3D" parent="Walls"]
 
@@ -784,86 +782,30 @@ mesh = SubResource("11")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("5_6cpg0")
-crate_respawn_time = 2.0
 
 [node name="StormZone" type="Area3D" parent="GameManager"]
 visible = false
 script = ExtResource("6_a6vh8")
-initial_radius = 50.0
+initial_radius = 1000000.0
 damage_increase_rate = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameManager/StormZone"]
 transform = Transform3D(1.0089036, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = false
 shape = SubResource("CylinderShape3D_8y8ki")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GameManager/StormZone"]
-mesh = SubResource("CylinderMesh_vavsa")
+visible = false
+mesh = SubResource("CylinderMesh_a6vh8")
 surface_material_override/0 = SubResource("StandardMaterial3D_mkrvw")
 
 [node name="Crates" type="Node3D" parent="."]
 
 [node name="crate" type="Area3D" parent="Crates"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 script = ExtResource("7_c7r5a")
 crate_type = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate"]
-transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
-mesh = SubResource("BoxMesh_6cpg0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate"]
-transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
-shape = SubResource("BoxShape3D_a6vh8")
-
-[node name="crate2" type="Area3D" parent="Crates"]
-visible = false
-script = ExtResource("7_c7r5a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate2"]
-transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
-mesh = SubResource("BoxMesh_6cpg0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate2"]
-transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
-shape = SubResource("BoxShape3D_a6vh8")
-
-[node name="crate3" type="Area3D" parent="Crates"]
-visible = false
-script = ExtResource("7_c7r5a")
-crate_type = 0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate3"]
-transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
-mesh = SubResource("BoxMesh_6cpg0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate3"]
-transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
-shape = SubResource("BoxShape3D_a6vh8")
-
-[node name="crate4" type="Area3D" parent="Crates"]
-visible = false
-script = ExtResource("7_c7r5a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate4"]
-transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
-mesh = SubResource("BoxMesh_6cpg0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate4"]
-transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
-shape = SubResource("BoxShape3D_a6vh8")
-
-[node name="crate5" type="Area3D" parent="Crates"]
-visible = false
-script = ExtResource("7_c7r5a")
-crate_type = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Crates/crate5"]
-transform = Transform3D(1, 0, 0, 0, 1.43, 0, 0, 0, 1, 0, 0.69805014, 0)
-mesh = SubResource("BoxMesh_6cpg0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Crates/crate5"]
-transform = Transform3D(1, 0, 0, 0, 1.6069242, 0, 0, 0, 1, 0, 0.6440408, 0)
-shape = SubResource("BoxShape3D_a6vh8")
 
 [connection signal="area_entered" from="GameManager/StormZone" to="Cameras" method="_on_storm_zone_area_entered"]
 [connection signal="area_entered" from="Crates/crate" to="Cameras" method="_on_crate_area_entered"]
