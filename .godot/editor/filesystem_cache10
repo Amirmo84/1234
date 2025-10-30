@@ -1,0 +1,13 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1761810474
+camera_controller.gd::GDScript::6005714238024987733::1711373818::0::1::::<>Node3D<><>0<>0<><>::
+default_env.tres::Environment::6092734283171668717::1707170290::0::1::::<><><>0<>0<><>::
+icon.webp::CompressedTexture2D::3626017087650301524::1707170290::1761768388::1::::<><><>0<>0<>589028de9034123a3c6890116d339791<>res://.godot/imported/icon.webp-e94f9a68b0f625a567a797079e4d325f.ctex::
+player.gd::GDScript::4398934869025860912::1707170290::0::1::::<>CharacterBody3D<><>0<>0<><>::
+README.md::TextFile::-1::1711568848::0::1::::<><><>0<>0<><>::
+GameManager.gd::GDScript::8853351359662721907::1761810474::0::1::::<>Node<><>0<>0<><>::
+crate.gd::GDScript::711140872863268906::1761810923::0::1::::<>Area3D<><>0<>0<><>::
+StormZone.gd::GDScript::4200300720740337024::1761810831::0::1::::<>Area3D<><>0<>0<><>::
+split_screen.gdshader::Shader::8937999577268570425::1707170290::0::1::::<><><>0<>0<><>::
+split_screen.tscn::PackedScene::7898366383696051203::1711568848::0::1::::<><><>0<>0<><>::res://camera_controller.gd<>res://split_screen.gdshader<>uid://brwp8bimc75uu::::res://icon.webp<>res://player.gd
+wall_coloring.gd::GDScript::9141617769014800875::1707170290::0::1::::<>Node3D<><>0<>1<><>::
